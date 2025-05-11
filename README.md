@@ -1,2 +1,2 @@
 # github-actions-course
-Project related with Github Actions.
+Project related with Github Actions Course.
