@@ -12,18 +12,24 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "test"
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+    
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-24.04
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       
       # set up (download and install) Docker CE(Engine) and Configure the Docker daemon 
-      - name: Set up Docker
+      - name: Set up Docker CE(Engine)
         uses: docker/setup-docker-action@v4
         with:
           daemon-config: |
@@ -33,7 +39,7 @@ jobs:
                 "containerd-snapshotter": true
               }
             }
-
+         
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
@@ -43,3 +49,9 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+  # This workflow contains a single job called "deploy"
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4 # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
